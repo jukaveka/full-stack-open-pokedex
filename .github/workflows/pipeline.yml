@@ -19,5 +19,15 @@ jobs:
         run: npm run eslint
       - name: Build
         run: npm run build
-      - name: Test
+      - name: Test components
         run: npm test
+      - name: Install E2E browsers
+        run: npx playwright install --with-deps
+      - name: Test end-to-end
+        run: npx playwright test
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
