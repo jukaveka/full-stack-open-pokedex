@@ -22,7 +22,8 @@ jobs:
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
-      - name: commit messages includes specified string
-        env:
-          MESSAGE_INCLUDES_STRING: ${{ contains(toJson(github.event.commits.*.message), 'Update' }}
-        run: echo "$MESSAGE_INCLUDES_STRING"
+      - name: joined commit messages
+        env: 
+          COMMIT_MESSAGES_STRING: ${{ join(toJson(github.event.commits.*.message) }}
+        run: echo"$COMMIT_MESSAGES_STRING"
+          
