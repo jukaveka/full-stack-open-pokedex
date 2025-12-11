@@ -26,4 +26,8 @@ jobs:
         env: 
           JOINED_ARRAY: ${{ join(github.event.commits.*.message, ', ') }}
         run: echo "$JOINED_ARRAY"
+      - name: joined array includes string
+        env:
+          CONTAINS_STRING: ${{ contains(join(github.event.commits.*.message, ', '), 'Update' }}
+        run: echo "$CONTAINS_STRING"
           
