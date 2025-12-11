@@ -22,12 +22,8 @@ jobs:
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
-      - name: joined commit messages
+      - name: joined array
         env: 
-          COMMIT_MESSAGES_STRING: ${{ join(toJson(github.event.commits.*.message)) }}
-        run: echo "$COMMIT_MESSAGES_STRING"
-      - name: joined commit messages includes string
-        env: 
-          INCLUDES_STRING: ${{ includes(join(toJson(github.event.commits.*.message)), "Update") }}
-        run: echo "$INCLUDES_STRING"
+          JOINED_ARRAY: ${{ join(["Issue 123", "Issue 125"]) }}
+        run: echo "$JOINED_ARRAY"
           
