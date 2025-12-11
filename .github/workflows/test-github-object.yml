@@ -28,6 +28,6 @@ jobs:
         run: echo "$COMMIT_MESSAGES_STRING"
       - name: joined commit messages includes string
         env: 
-          INCLUDES_STRING: ${{ includes(join(toJson(github.event.commits.*.message)), "update" }}
+          INCLUDES_STRING: ${{ includes(join(toJson(github.event.commits.*.message)), "Update") }}
         run: echo "$INCLUDES_STRING"
           
