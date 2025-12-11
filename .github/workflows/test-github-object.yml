@@ -29,6 +29,6 @@ jobs:
       - name: env checks
         env:
           JOINED_ARRAY: ${{ join(github.event.commits.*.message, ', ') }}
-          CONTAINS_STRING: ${{ env.JOINED_ARRAY, 'Update' }}
+          CONTAINS_STRING: ${{ contains(env.JOINED_ARRAY, 'Update') }}
         run: env
           
