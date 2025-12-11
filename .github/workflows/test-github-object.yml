@@ -26,7 +26,7 @@ jobs:
         run: echo "$COMMIT_MESSAGES"
       - name: joined array
         env: 
-          JOINED_ARRAY: ${{ join(github.event.commits.*.message, ', ') }}
+          JOINED_ARRAY: ${{ join(env.COMMIT_MESSAGES, ', ') }}
         run: echo "$JOINED_ARRAY"
       - name: env checks
         env:
