@@ -3,7 +3,7 @@ name: Testing stuff
 on:
   push:
     branches:
-      - main
+      - github-object-testing
 
 jobs:
   a_test_job:
@@ -26,4 +26,8 @@ jobs:
         env: 
           COMMIT_MESSAGES_STRING: ${{ join(toJson(github.event.commits.*.message)) }}
         run: echo "$COMMIT_MESSAGES_STRING"
+      - name: joined commit messages includes string
+        env: 
+          INCLUDES_STRING: ${{ includes(join(toJson(github.event.commits.*.message)), "update" }}
+        run: echo "$INCLUDES_STRING"
           
