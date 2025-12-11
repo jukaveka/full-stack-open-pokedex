@@ -28,7 +28,7 @@ jobs:
         run: echo "$JOINED_ARRAY"
       - name: env checks
         env:
-          CONTAINS_STRING: 'ASD'
+          CONTAINS_STRING: ASD
           JOINED_ARRAY: ${{ join(github.event.commits.*.message, ', ') }}
         run: |
           env
