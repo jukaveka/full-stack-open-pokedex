@@ -9,6 +9,8 @@ jobs:
   a_test_job:
     runs-on: ubuntu-latest
     steps:
+      - name: env before checkout
+        run: env
       - uses: actions/checkout@v4
       - name: github context
         env:
@@ -28,8 +30,8 @@ jobs:
         run: echo "$JOINED_ARRAY"
       - name: env checks
         env:
-          MESSAGES_CONTAIN_STRING: ${{ contains('Update test-github-object.yml', 'Update')}}
           JOINED_ARRAY: ${{ join(github.event.commits.*.message, ', ') }}
+          MESSAGES_CONTAIN_STRING: ${{ contains('Update test-github-object.yml', 'Update')}}
         run: |
           env
           echo "$JOINED_ARRAY"
