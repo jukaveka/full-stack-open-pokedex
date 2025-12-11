@@ -6,10 +6,10 @@ on:
       - github-object-testing
 
 jobs:
-  env:
-    GITHUB_CONTEXT: ${{ toJson(github) }}
   a_test_job:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_CONTEXT: ${{ toJson(github) }}
     steps:
       - name: env before checkout
         run: |
