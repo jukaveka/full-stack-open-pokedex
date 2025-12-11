@@ -9,12 +9,10 @@ jobs:
   a_test_job:
     runs-on: ubuntu-latest
     env:
-      GITHUB_CONTEXT: ${{ toJson(github) }}
+      COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
     steps:
       - name: env before checkout
-        run: |
-          env
-          echo "$GITHUB_CONTEXT"
+        run: echo "$COMMIT_MESSAGES"
       - uses: actions/checkout@v4
       - name: github context
         env:
