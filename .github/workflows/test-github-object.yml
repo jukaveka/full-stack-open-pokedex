@@ -6,11 +6,15 @@ on:
       - github-object-testing
 
 jobs:
+  env:
+    GITHUB_CONTEXT: ${{ toJson(github) }}
   a_test_job:
     runs-on: ubuntu-latest
     steps:
       - name: env before checkout
-        run: env
+        run: |
+          env
+          echo "$GITHUB_CONTEXT"
       - uses: actions/checkout@v4
       - name: github context
         env:
