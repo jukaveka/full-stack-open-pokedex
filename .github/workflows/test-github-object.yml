@@ -16,6 +16,8 @@ jobs:
         run: echo "$JOINED_COMMIT_MESSAGES"
       - name: env checks
         env:
-          MESSAGES_CONTAIN_STRING: ${{ contains('Update test-github-object.yml', 'Update')}}
-        run: env
+          MESSAGES_CONTAIN_STRING: ${{ contains(env.JOINED_COMMIT_MESSAGES, 'Update')}}
+        run: |
+          env
+          echo "$MESSAGES_CONTAIN_STRING"
           
