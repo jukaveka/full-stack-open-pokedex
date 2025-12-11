@@ -9,30 +9,13 @@ jobs:
   a_test_job:
     runs-on: ubuntu-latest
     env:
-      COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+      JOINED_COMMIT_MESSAGES: ${{ join(github.event.commits.*.message, ', ') }}
     steps:
-      - name: env before checkout
-        run: echo "$COMMIT_MESSAGES"
       - uses: actions/checkout@v4
-      - name: github context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-      - name: commits
-        env:
-          COMMITS: ${{ toJson(github.event.commits) }}
-        run: echo "$COMMITS"
-      - name: commit messages
-        run: echo "$COMMIT_MESSAGES"
       - name: joined array
-        env: 
-          JOINED_ARRAY: ${{ join(env.COMMIT_MESSAGES, ', ') }}
-        run: echo "$JOINED_ARRAY"
+        run: echo "$JOINED_COMMIT_MESSAGES"
       - name: env checks
         env:
-          JOINED_ARRAY: ${{ join(github.event.commits.*.message, ', ') }}
           MESSAGES_CONTAIN_STRING: ${{ contains('Update test-github-object.yml', 'Update')}}
-        run: |
-          env
-          echo "$JOINED_ARRAY"
+        run: env
           
