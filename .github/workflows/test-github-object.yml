@@ -12,7 +12,7 @@ jobs:
   a_test_job:
     runs-on: ubuntu-latest
     env:
-      SKIP_TAG: ${{ contains('Update test-github-object.yml', 'Update') }}
+      SKIP_TAG: ${{ env.JOINED_COMMIT_MESSAGES }}
     steps:
       - uses: actions/checkout@v4
       - name: joined array
