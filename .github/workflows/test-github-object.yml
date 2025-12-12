@@ -16,5 +16,5 @@ jobs:
       - name: joined array
         run: echo "$JOINED_COMMIT_MESSAGES"
       - name: env checks
-          env
+        run: env
           
