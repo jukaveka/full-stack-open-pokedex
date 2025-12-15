@@ -38,4 +38,5 @@ jobs:
         run: |
           env
           echo "$RELEASE"
+          echo "asd"
 
