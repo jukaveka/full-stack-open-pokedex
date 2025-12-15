@@ -30,7 +30,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Deployment check
         env:
-          DEPLOY_APP: ${{ needs.a_test_job.outputs.release }}
+          DEPLOY_APP: asd
         run: |
           env
           echo "$DEPLOY_APP"
