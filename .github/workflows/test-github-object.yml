@@ -28,10 +28,10 @@ jobs:
     needs: a_test_job
     steps:
       - uses: actions/checkout@v4
-      - name: Deployment check
+      - name: Release check
         env:
-          DEPLOY_APP: asd
+          RELEASE: asd
         run: |
           env
-          echo "$DEPLOY_APP"
+          echo "$RELEASE"
 
