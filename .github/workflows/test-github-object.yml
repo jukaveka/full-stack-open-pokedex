@@ -39,4 +39,8 @@ jobs:
           env
           echo "$SKIP_RELEASE"
           echo "asd"
+      - name: Skip this function
+        if: ${{ env.SKIP_RELEASE == true }}
+        run: |
+          "Skip"
 
