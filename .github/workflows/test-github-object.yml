@@ -5,19 +5,18 @@ on:
     branches:
       - github-object-testing
 
-env:
-  JOINED_COMMIT_MESSAGES: ${{ join(github.event.commits.*.message, ', ') }}
-
 jobs:
   a_test_job:
     runs-on: ubuntu-latest
     env:
-      SKIP_TAG: ${{ env.JOINED_COMMIT_MESSAGES }}
+      JOINED_COMMIT_MESSAGES: ${{ join(github.event.commits.*.message, ', ') }}
     steps:
       - uses: actions/checkout@v4
       - name: joined array
         run: echo "$JOINED_COMMIT_MESSAGES"
       - name: skip tag
+        env:
+          SKIP_TAG: ${{ contains(env.JOINED_COMMIT_MESSAGES, 'Update') }}
         run: echo "$SKIP_TAG"
       - name: env
         run: env
