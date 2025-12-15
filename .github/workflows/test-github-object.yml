@@ -5,11 +5,13 @@ on:
     branches:
       - github-object-testing
 
+
 jobs:
   a_test_job:
     runs-on: ubuntu-latest
     env:
       JOINED_COMMIT_MESSAGES: ${{ join(github.event.commits.*.message, ', ') }}
+      SKIP_STRING: "#skip"
     outputs:
       release: ${{ steps.check_deploy.outputs.skip_release == false }}
     steps:
@@ -21,6 +23,7 @@ jobs:
           SKIP_TAG: ${{ contains(env.JOINED_COMMIT_MESSAGES, 'Update') }}
         run: |
           echo "$SKIP_TAG"
+          echo "$SKIP_STRING"
           echo "skip_release=$SKIP_TAG" >> "$GITHUB_OUTPUT"
       - name: env
         run: env
