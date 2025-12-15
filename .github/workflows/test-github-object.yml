@@ -31,4 +31,7 @@ jobs:
       - name: Deployment check
         env:
           DEPLOY_APP: ${{ needs.a_test_job.outputs.release }}
-        run: echo "$DEPLOY_APP"
+        run: |
+          env
+          echo "$DEPLOY_APP"
+
