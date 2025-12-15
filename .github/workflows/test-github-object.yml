@@ -13,7 +13,7 @@ jobs:
       JOINED_COMMIT_MESSAGES: ${{ join(github.event.commits.*.message, ', ') }}
       SKIP_STRING: "#skip"
     outputs:
-      release: ${{ steps.check_deploy.outputs.skip_release == false }}
+      release: ${{ !steps.check_deploy.outputs.skip_release }}
     steps:
       - uses: actions/checkout@v4
       - name: joined array
