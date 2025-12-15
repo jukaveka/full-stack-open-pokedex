@@ -16,8 +16,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: joined array
         run: echo "$JOINED_COMMIT_MESSAGES"
-      - name: skip tag
-        id: check_deploy
+      - id: check_deploy
         env:
           SKIP_TAG: ${{ contains(env.JOINED_COMMIT_MESSAGES, 'Update') }}
         run: echo "deploy = $SKIP_TAG" >> "$GITHUB_OUTPUT"
