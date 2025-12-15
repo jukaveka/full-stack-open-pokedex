@@ -27,7 +27,7 @@ jobs:
     needs: a_test_job
     env:
       RELEASE: ${{ needs.a_test_job.outputs.release }}
-      JOB_A_OUTPUTS: ${{ needs.a_test_job.outputs }}
+      JOB_A_OUTPUTS: ${{ needs.a_test_job.outputs.* }}
     steps:
       - uses: actions/checkout@v4
       - name: Release check
