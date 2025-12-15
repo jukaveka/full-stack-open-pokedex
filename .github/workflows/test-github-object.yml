@@ -42,5 +42,5 @@ jobs:
       - name: Release
         if: ${{ env.SKIP_RELEASE == false }}
         run: |
-          "Release"
+          echo "release"
 
