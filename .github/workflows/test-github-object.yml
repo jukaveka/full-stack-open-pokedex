@@ -20,7 +20,7 @@ jobs:
         run: echo "$JOINED_COMMIT_MESSAGES"
       - id: check_deploy
         env:
-          SKIP_TAG: ${{ contains(env.JOINED_COMMIT_MESSAGES, 'Update') }}
+          SKIP_TAG: ${{ contains(env.JOINED_COMMIT_MESSAGES, env.SKIP_STRING) }}
         run: |
           echo "$SKIP_TAG"
           echo "$SKIP_STRING"
