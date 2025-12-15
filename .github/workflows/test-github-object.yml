@@ -39,7 +39,9 @@ jobs:
           env
           echo "$SKIP_RELEASE"
       - name: Release
-        if: ${{ env.SKIP_RELEASE == false }}
+        env:
+          RELEASE: ${{ env.SKIP_RELEASE == false }}
         run: |
           echo "release"
+          echo "$RELEASE"
 
