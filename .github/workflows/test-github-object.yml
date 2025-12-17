@@ -41,6 +41,6 @@ jobs:
           echo "$SKIP_RELEASE"
           echo "$DEPLOY_AND_RELEASE"
       - name: Conditiondal step
-        if: ${{ DEPLOY_AND_RELEASE == 'true' }}
+        if: ${{ env.DEPLOY_AND_RELEASE == 'true' }}
         run: |
           echo "New version deployed and released"
