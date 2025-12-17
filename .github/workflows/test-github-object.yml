@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: a_test_job
     env:
-      SKIP_RELEASE: ${{ needs.a_test_job.skip_release }}
+      SKIP_RELEASE: ${{ needs.a_test_job.outputs.skip_release }}
       RELEASE: ${{ needs.a_test_job.outputs.skip_release == false }}
     steps:
       - uses: actions/checkout@v4
