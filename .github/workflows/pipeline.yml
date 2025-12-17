@@ -45,8 +45,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Check deployment and release status
         env:
-          CAN_DEPLOY_AND_RELEASE: ${{ contains(env.JOINED_COMMIT_MESSAGES, env.SKIP_STRING) }}
-        run: echo "$CAN_DEPLOY_AND_RELEASE"
+          DEPLOY_AND_RELEASE: ${{ contains(env.JOINED_COMMIT_MESSAGES, env.SKIP_STRING) == 'false' }}
+        run: echo "$DEPLOY_AND_RELEASE"
       - name: Deploy
         if: ${{ false }}
         env:
