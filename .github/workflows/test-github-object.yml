@@ -3,11 +3,14 @@ name: Testing stuff
 on:
   push:
     branches:
-      - main
+      - github-object-testing
 
 jobs:
   a_test_job:
     runs-on: ubuntu-latest
+    env:
+      JOINED_COMMIT_MESSAGES: ${{ join(github.event.commits.*.message, ', ') }}
+      SKIP_STRING: "#skip"
     steps:
       - uses: actions/checkout@v4
       - name: github context
