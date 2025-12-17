@@ -46,7 +46,10 @@ jobs:
       - name: Check deployment and release status
         env:
           DEPLOY_AND_RELEASE: ${{ contains(env.JOINED_COMMIT_MESSAGES, env.SKIP_STRING) == 'false' }}
-        run: echo "$DEPLOY_AND_RELEASE"
+        run: |
+          echo "$JOINED_COMMIT_MESSAGES"
+          echo "$SKIP_STRING"
+          echo "$DEPLOY_AND_RELEASE"
       - name: Deploy
         if: ${{ false }}
         env:
