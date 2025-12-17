@@ -8,6 +8,10 @@ on:
     branches: [main]
     types: [opened, synchronize]
 
+env:
+  JOINED_COMMIT_MESSAGES: ${{ join(github.event.commits.*.message, ', ') }}
+  SKIP_STRING: "#skip"
+
 jobs:
   lint_and_test:
     runs-on: ubuntu-latest
@@ -38,16 +42,20 @@ jobs:
   deploy_and_release:
     needs: [lint_and_test]
     runs-on: ubuntu-latest
+    env:
+      CAN_DEPLOY_AND_RELEASE: ${{ contains(env.JOINED_COMMIT_MESSAGES, env.SKIP_STRING) == 'false' }}
     steps:
       - uses: actions/checkout@v4
+      - name: Check deployment and release status
+        run: echo "$CAN_DEPLOY_AND_RELEASE"
       - name: Deploy
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ contains("Joo", "ei") }}
         env:
           deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
         run: |
           curl "$deploy_url"
       - name: Bump version and push tag
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ contains("Joo", "ei") }}
         uses: anothrNick/github-tag-action@1.75.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
