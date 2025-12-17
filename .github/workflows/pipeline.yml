@@ -48,13 +48,13 @@ jobs:
           CAN_DEPLOY_AND_RELEASE: ${{ contains(env.JOINED_COMMIT_MESSAGES, env.SKIP_STRING) }}
         run: echo "$CAN_DEPLOY_AND_RELEASE"
       - name: Deploy
-        if: ${{ contains("Joo", "ei") }}
+        if: ${{ false }}
         env:
           deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
         run: |
           curl "$deploy_url"
       - name: Bump version and push tag
-        if: ${{ contains("Joo", "ei") }}
+        if: ${{ false }}
         uses: anothrNick/github-tag-action@1.75.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
