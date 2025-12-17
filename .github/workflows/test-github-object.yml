@@ -13,6 +13,8 @@ jobs:
   a_test_job:
     runs-on: ubuntu-latest
     steps:
-      - run:
+      - name: env
+        run:
+          env
           echo "$JOINED_COMMIT_MESSAGES"
           echo "$SKIP_STRING"
