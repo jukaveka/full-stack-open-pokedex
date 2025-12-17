@@ -32,7 +32,7 @@ jobs:
     needs: a_test_job
     env:
       SKIP_RELEASE: ${{ needs.a_test_job.outputs.skip_release }}
-      RELEASE: ${{ needs.a_test_job.outputs.skip_release == false }}
+      RELEASE: ${{ needs.a_test_job.outputs.skip_release == 'false' }}
     steps:
       - uses: actions/checkout@v4
       - name: Release check
