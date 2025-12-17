@@ -32,11 +32,11 @@ jobs:
     needs: a_test_job
     env:
       SKIP_RELEASE: ${{ needs.a_test_job.outputs.skip_release }}
-      TAG_RELEASE: ${{ needs.a_test_job.outputs.skip_release == 'false' }}
+      DEPLOY_AND_RELEASE: ${{ needs.a_test_job.outputs.skip_release == 'false' }}
     steps:
       - uses: actions/checkout@v4
       - name: Release check
         run: |
           env
           echo "$SKIP_RELEASE"
-          echo "$TAG_RELEASE"
+          echo "$DEPLOY_AND_RELEASE"
