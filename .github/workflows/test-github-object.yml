@@ -40,3 +40,4 @@ jobs:
           env
           echo "$SKIP_RELEASE"
           echo "$DEPLOY_AND_RELEASE"
+          echo "First true, then false"
