@@ -40,6 +40,7 @@ jobs:
           env
           echo "$SKIP_RELEASE"
           echo "$DEPLOY_AND_RELEASE"
+          echo "Conditional step should now be done"
       - name: Conditiondal step
         if: ${{ env.DEPLOY_AND_RELEASE == 'true' }}
         run: |
