@@ -43,14 +43,6 @@ jobs:
       SKIP_STRING: "#skip"
     steps:
       - uses: actions/checkout@v4
-      - name: Check deployment and release status
-        env:
-          SKIP_RELEASE: ${{ contains(env.JOINED_COMMIT_MESSAGES, env.SKIP_STRING) }}
-        if: ${{ true }}
-        run: |
-          echo "$JOINED_COMMIT_MESSAGES"
-          echo "$SKIP_STRING"
-          echo "$SKIP_RELEASE"
       - name: Deploy
         env:
           SKIP_DEPLOY: ${{ contains(env.JOINED_COMMIT_MESSAGES, env.SKIP_STRING) }}
