@@ -54,9 +54,8 @@ jobs:
       - name: Deploy
         env:
           SKIP_RELEASE: ${{ contains(env.JOINED_COMMIT_MESSAGES, env.SKIP_STRING) }}
-        if: ${{ env.SKIP_RELEASE == 'false' }}
-        env:
           deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        if: ${{ env.SKIP_RELEASE == 'false' }}
         run: |
           curl "$deploy_url"
       - name: Bump version and push tag
