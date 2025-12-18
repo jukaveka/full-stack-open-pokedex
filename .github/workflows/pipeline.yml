@@ -53,15 +53,16 @@ jobs:
           echo "$SKIP_RELEASE"
       - name: Deploy
         env:
-          SKIP_RELEASE: ${{ contains(env.JOINED_COMMIT_MESSAGES, env.SKIP_STRING) }}
+          SKIP_DEPLOY: ${{ contains(env.JOINED_COMMIT_MESSAGES, env.SKIP_STRING) }}
           deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
-        if: ${{ env.SKIP_RELEASE == 'false' }}
+        if: ${{ env.SKIP_DEPLOY == 'false' }}
         run: |
           curl "$deploy_url"
           echo "skip"
       - name: Bump version and push tag
-        if: ${{ false }}
-        uses: anothrNick/github-tag-action@1.75.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
+          SKIP_RELEASE: ${{ contains(env.JOINED_COMMIT_MESSAGES, env.SKIP_STRING) }}
+        if: ${{ env.SKIP_RELEASE == 'false' }}
+        uses: anothrNick/github-tag-action@1.75.0
