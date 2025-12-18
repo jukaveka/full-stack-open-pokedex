@@ -41,9 +41,7 @@ jobs:
 
   deploy_and_release:
     needs: [lint_and_test]
-    env:
-      SKIP_DEPLOY_AND_RELEASE: ${{ contains(env.JOINED_COMMIT_MESSAGES, env.SKIP_STRING) }}
-    if: ${{ env.SKIP_DEPLOY_AND_RELEASE == 'false' }}
+    if: ${{ !contains(env.JOINED_COMMIT_MESSAGES, env.SKIP_STRING) }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
