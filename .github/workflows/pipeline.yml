@@ -52,7 +52,9 @@ jobs:
           echo "$SKIP_STRING"
           echo "$SKIP_RELEASE"
       - name: Deploy
-        if: ${{ false }}
+        env:
+          SKIP_RELEASE: ${{ contains(env.JOINED_COMMIT_MESSAGES, env.SKIP_STRING) }}
+        if: ${{ env.SKIP_RELEASE == 'false' }}
         env:
           deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
         run: |
