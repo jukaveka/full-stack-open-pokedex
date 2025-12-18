@@ -58,6 +58,7 @@ jobs:
         if: ${{ env.SKIP_RELEASE == 'false' }}
         run: |
           curl "$deploy_url"
+          echo "skip"
       - name: Bump version and push tag
         if: ${{ false }}
         uses: anothrNick/github-tag-action@1.75.0
