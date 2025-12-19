@@ -51,11 +51,10 @@ jobs:
     needs: [lint_and_test]
     env:
       SKIP_RELEASE: ${{ needs.lint_and_test.outputs.skip_release }}
+    if: ${{ env.SKIP_RELEASE == 'false' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Check previous job output
-        run: echo "$SKIP_RELEASE"
       - name: Deploy
         if: ${{ false }}
         env:
