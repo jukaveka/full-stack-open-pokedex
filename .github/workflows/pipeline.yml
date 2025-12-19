@@ -52,13 +52,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Deploy
-        if: ${{ false }}
         env:
           deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
         run: |
           curl "$deploy_url"
       - name: Bump version and push tag
-        if: ${{ false }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
