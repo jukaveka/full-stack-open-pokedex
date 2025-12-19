@@ -49,9 +49,7 @@ jobs:
 
   deploy_and_release:
     needs: [lint_and_test]
-    env:
-      SKIP_RELEASE: ${{ needs.lint_and_test.outputs.skip_release }}
-    if: ${{ env.SKIP_RELEASE == 'false' }}
+    if: ${{ needs.lint_and_test.outputs.skip_release == 'false' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
