@@ -15,6 +15,8 @@ env:
 jobs:
   lint_and_test:
     runs-on: ubuntu-latest
+    outputs:
+      skip_release: ${{ steps.release_status.outputs.skip_release }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -38,19 +40,30 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+      - id: release_status
+        env:
+          SKIP_TAG: ${{ contains(env.JOINED_COMMIT_MESSAGES, env.SKIP_STRING) }}
+        run: |
+          env
+          echo "skip_release=$SKIP_TAG" >> "$GITHUB_OUTPUT"
 
   deploy_and_release:
     needs: [lint_and_test]
-    if: ${{ !contains(env.JOINED_COMMIT_MESSAGES, env.SKIP_STRING) }}
+    env:
+      SKIP_RELEASE: ${{ needs.lint_and_test.outputs.skip_release }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Check previous job output
+        run: echo "$SKIP_RELEASE"
       - name: Deploy
+        if: ${{ false }}
         env:
           deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
         run: |
           curl "$deploy_url"
       - name: Bump version and push tag
+        if: ${{ false }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
