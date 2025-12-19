@@ -43,9 +43,7 @@ jobs:
       - id: release_status
         env:
           SKIP_TAG: ${{ contains(env.JOINED_COMMIT_MESSAGES, env.SKIP_STRING) }}
-        run: |
-          env
-          echo "skip_release=$SKIP_TAG" >> "$GITHUB_OUTPUT"
+        run: echo "skip_release=$SKIP_TAG" >> "$GITHUB_OUTPUT"
 
   deploy_and_release:
     needs: [lint_and_test]
