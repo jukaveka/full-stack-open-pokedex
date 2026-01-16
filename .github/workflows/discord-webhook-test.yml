@@ -14,9 +14,9 @@ jobs:
       with:
         webhook: ${{ secrets.DISCORD_WEBHOOK }}
         status: ${{ job.status }}
-        content: "Content"
-        title: "Title"
-        description: "Description"
+        content: "Status notification"
+        title: "Deploy"
+        description: "Deployment of full-stack-open-pokedex"
         image: ${{ secrets.EMBED_IMAGE }}
         color: 0x0000ff
         url: "https://github.com/sarisia/actions-status-discord"
