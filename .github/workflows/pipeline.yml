@@ -65,9 +65,12 @@ jobs:
 
   notify_status:
     needs: [lint_and_test, deploy_and_release]
-    if: ${{ needs.deploy_and_release.result != 'skipped' }}
+    env:
+      DEPLOY_RESULT: ${{ needs.deploy_and_release.result != 'skipped' }}
     runs-on: ubuntu-latest
     steps:
+      - name: Check deployment job result
+        run: echo $"DEPLOY_RESULT"
       - name: Notify deployment status on Discord
         uses: sarisia/actions-status-discord@v1
         if: always()
