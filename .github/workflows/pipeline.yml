@@ -62,13 +62,19 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
         uses: anothrNick/github-tag-action@1.75.0
+
+  notify_status:
+    needs: [lint_and_test, deploy_and_release]
+    if: ${{ jobs.deploy_and_release.result != 'skipped' }}
+    runs-on: ubuntu-latest
+    steps:
       - name: Notify deployment status on Discord
         uses: sarisia/actions-status-discord@v1
         if: always()
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          status: ${{ job.status }}
-          content: "Status notification"
+          status: ${{ jobs.deploy_and_release.result }}
+          content: "Build status notification"
           title: "Deploy"
           description: "Build, test and deploy new version of pokedex"
           image: ${{ secrets.EMBED_IMAGE }}
