@@ -7,17 +7,19 @@ on:
 
 jobs:
   use_webhook:
-    with:
-      - name: Notify
-        uses: rjstone/discord-webhook-notify@v2
-        with:
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-          username: Username
-          avatarUrl: https://domain/images/custom.png
-          text: Text
-          severity: info # only to make sure the embed is added
-          color: '#ff00aa'
-          title: Title
-          description: "Description"
-          # details: not needed because we overrode default description.
-          footer: Footer
+    runs-on: ubuntu-latest
+    steps:
+      with:
+        - name: Notify
+          uses: rjstone/discord-webhook-notify@v2
+          with:
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+            username: Username
+            avatarUrl: https://domain/images/custom.png
+            text: Text
+            severity: info # only to make sure the embed is added
+            color: '#ff00aa'
+            title: Title
+            description: "Description"
+            # details: not needed because we overrode default description.
+            footer: Footer
