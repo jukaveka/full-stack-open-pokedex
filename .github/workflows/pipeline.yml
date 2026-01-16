@@ -62,17 +62,17 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
         uses: anothrNick/github-tag-action@1.75.0
-      - name: Test Custom
-        uses: rjstone/discord-webhook-notify@v2
+      - name: Notify deployment status on Discord
+        uses: sarisia/actions-status-discord@v1
+        if: always()
         with:
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-          username: Custom Bot Username
-          avatarUrl: https://domain/images/custom.png
-          text: Text
-          severity: info # only to make sure the embed is added
-          color: '#ff00aa'
-          title: Title
-          description: "Description"
-          # details: not needed because we overrode default description.
-          footer: Footer
-
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: ${{ job.status }}
+          content: "Status notification"
+          title: "Deploy"
+          description: "Build, test and deploy new version of pokedex"
+          image: ${{ secrets.EMBED_IMAGE }}
+          color: 0x0000ff
+          url: "https://github.com/sarisia/actions-status-discord"
+          username: GitHub Actions
+          avatar_url: ${{ secrets.AVATAR_URL }}
