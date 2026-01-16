@@ -64,7 +64,7 @@ jobs:
         uses: anothrNick/github-tag-action@1.75.0
 
   notify_status:
-    needs: [lint_and_test, deploy_and_release]
+    needs: [deploy_and_release]
     env:
       DEPLOY_RESULT: ${{ needs.deploy_and_release.result != 'skipped' }}
     runs-on: ubuntu-latest
