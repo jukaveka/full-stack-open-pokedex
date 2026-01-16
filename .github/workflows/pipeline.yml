@@ -24,6 +24,10 @@ jobs:
           node-version: "20"
       - name: Install dependencies
         run: npm install
+      - id: release_status
+        env:
+          SKIP_TAG: ${{ contains(env.JOINED_COMMIT_MESSAGES, env.SKIP_STRING) }}
+        run: echo "skip_release=$SKIP_TAG" >> "$GITHUB_OUTPUT"
       - name: Lint
         run: npm run eslint
       - name: Build
@@ -40,12 +44,6 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
-      - id: release_status
-        env:
-          SKIP_TAG: ${{ contains(env.JOINED_COMMIT_MESSAGES, env.SKIP_STRING) }}
-        run: |
-          echo "$SKIP_TAG"
-          echo "skip_release=$SKIP_TAG" >> "$GITHUB_OUTPUT"
 
   deploy_and_release:
     needs: [lint_and_test]
@@ -64,13 +62,10 @@ jobs:
         uses: anothrNick/github-tag-action@1.75.0
 
   notify_status:
-    needs: [deploy_and_release]
-    env:
-      DEPLOY_RESULT: ${{ needs.deploy_and_release.result != 'skipped' }}
+    needs: [lint_and_test, deploy_and_release]
+    if: "always()&&(needs.lint_and_test.skip_release == 'false')"
     runs-on: ubuntu-latest
     steps:
-      - name: Check deployment job result
-        run: echo $"DEPLOY_RESULT"
       - name: Notify deployment status on Discord
         uses: sarisia/actions-status-discord@v1
         if: always()
