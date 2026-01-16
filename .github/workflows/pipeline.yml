@@ -73,7 +73,7 @@ jobs:
         if: always()
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          status: ${{ jobs.deploy_and_release.result }}
+          status: ${{ needs.deploy_and_release.result }}
           content: "Build status notification"
           title: "Deploy"
           description: "Build, test and deploy new version of pokedex"
