@@ -9,16 +9,7 @@ jobs:
   use_webhook:
     runs-on: ubuntu-latest
     steps:
-      - name: Notify
-        uses: rjstone/discord-webhook-notify@v2
+      - uses: sarisia/actions-status-discord@v1
+        if: always()
         with:
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-          username: Username
-          avatarUrl: https://domain/images/custom.png
-          text: Text
-          severity: info # only to make sure the embed is added
-          color: '#ff00aa'
-          title: Title
-          description: "Description"
-          # details: not needed because we overrode default description.
-          footer: Footer
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
