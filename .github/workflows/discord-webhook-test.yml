@@ -16,7 +16,7 @@ jobs:
         status: ${{ job.status }}
         content: "Status notification"
         title: "Deploy"
-        description: "Build, test and deploy new version of full-stack pokedex"
+        description: "Build, test and deploy new version of pokedex"
         image: ${{ secrets.EMBED_IMAGE }}
         color: 0x0000ff
         url: "https://github.com/sarisia/actions-status-discord"
