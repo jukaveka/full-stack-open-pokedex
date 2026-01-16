@@ -65,7 +65,7 @@ jobs:
 
   notify_status:
     needs: [lint_and_test, deploy_and_release]
-    if: ${{ jobs.deploy_and_release.result != 'skipped' }}
+    if: ${{ needs.deploy_and_release.result != 'skipped' }}
     runs-on: ubuntu-latest
     steps:
       - name: Notify deployment status on Discord
