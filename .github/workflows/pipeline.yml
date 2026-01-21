@@ -51,7 +51,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Deploy
+      - name: Deploy new version of app
         env:
           deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
         run: curl "$deploy_url"
@@ -70,11 +70,25 @@ jobs:
       DEPLOY_SUCCESS: ${{ needs.deploy_and_release.result == 'success' }}
     steps:
       - name: Success notification
-        uses: sarisia/actions-status-discord@v1
         if: ${{ (env.TEST_SUCCESS == 'true') && (env.DEPLOY_SUCCESS == 'true') }}
+        uses: sarisia/actions-status-discord@v1
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          status: "Success"
+          status: "success"
+          content: "Build status notification"
+          title: "Deploy"
+          description: "Build, test and deploy new version of pokedex"
+          image: ${{ secrets.EMBED_IMAGE }}
+          color: 0x0000ff
+          url: "https://github.com/sarisia/actions-status-discord"
+          username: GitHub Actions
+          avatar_url: ${{ secrets.AVATAR_URL }}
+      - name: Cancelled notification
+        if: ${{ (env.TEST_SUCCESS == 'true') && (env.DEPLOY_SUCCESS == 'false') }}
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: "cancelled"
           content: "Build status notification"
           title: "Deploy"
           description: "Build, test and deploy new version of pokedex"
