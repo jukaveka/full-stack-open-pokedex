@@ -65,13 +65,16 @@ jobs:
     needs: [lint_and_test, deploy_and_release]
     if: ${{ always() && (needs.lint_and_test.outputs.skip_release == 'false') }}
     runs-on: ubuntu-latest
+    env:
+      TEST_SUCCESS: ${{ needs.lint_and_test.result == 'success' }}
+      DEPLOY_SUCCESS: ${{ needs.deploy_and_release.result == 'success' }}
     steps:
-      - name: Notify deployment status on Discord
+      - name: Success notification
         uses: sarisia/actions-status-discord@v1
-        if: always()
+        if: ${{ (env.TEST_SUCCESS == 'true') && (env.DEPLOY_SUCCESS == 'true') }}
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          status: ${{ needs.deploy_and_release.result }}
+          status: "Success"
           content: "Build status notification"
           title: "Deploy"
           description: "Build, test and deploy new version of pokedex"
