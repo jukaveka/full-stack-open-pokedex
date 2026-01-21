@@ -25,6 +25,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - id: release_status
+        name: Check for skip tag in commit message
         env:
           SKIP_TAG: ${{ contains(env.JOINED_COMMIT_MESSAGES, env.SKIP_STRING) }}
         run: echo "skip_release=$SKIP_TAG" >> "$GITHUB_OUTPUT"
