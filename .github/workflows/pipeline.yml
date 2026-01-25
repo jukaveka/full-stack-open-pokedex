@@ -70,6 +70,10 @@ jobs:
       TEST_SUCCESS: ${{ needs.lint_and_test.result == 'success' }}
       DEPLOY_SUCCESS: ${{ needs.deploy_and_release.result == 'success' }}
     steps:
+      - name: Print env variables
+        run: |
+          echo "$TEST_SUCCESS"
+          echo "$DEPLOY_SUCCESS"
       - name: Success notification
         if: ${{ (env.TEST_SUCCESS == 'true') && (env.DEPLOY_SUCCESS == 'true') }}
         uses: sarisia/actions-status-discord@v1
