@@ -11,6 +11,7 @@ on:
 env:
   JOINED_COMMIT_MESSAGES: ${{ join(github.event.commits.*.message, ', ') }}
   SKIP_STRING: "#skip"
+  EVENT_TYPE: ${{ github.event_name}}
 
 jobs:
   lint_and_test:
@@ -28,10 +29,10 @@ jobs:
         name: Check for skip tag in commit message
         env:
           SKIP_TAG: ${{ contains(env.JOINED_COMMIT_MESSAGES, env.SKIP_STRING) }}
-          COMMIT_MESSAGES: ${{ github.event.* }}
+          EVENT_TYPE: ${{ env.EVENT_TYPE }}
         run: |
           echo "$SKIP_TAG"
-          echo "$COMMIT_MESSAGES"
+          echo "$EVENT_TYPE"
           echo "skip_release=$SKIP_TAG" >> "$GITHUB_OUTPUT"
       - name: Lint
         run: npm run eslint
