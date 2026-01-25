@@ -100,7 +100,7 @@ jobs:
           title: "Deploy"
           description: "Build, test and deploy new version of pokedex"
           image: ${{ secrets.EMBED_IMAGE }}
-          color: 0x0000ff
+          color: 0xCA2E55
           url: "https://github.com/sarisia/actions-status-discord"
           username: GitHub Actions
           avatar_url: ${{ secrets.AVATAR_URL }}
