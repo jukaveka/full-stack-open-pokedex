@@ -28,7 +28,11 @@ jobs:
         name: Check for skip tag in commit message
         env:
           SKIP_TAG: ${{ contains(env.JOINED_COMMIT_MESSAGES, env.SKIP_STRING) }}
-        run: echo "skip_release=$SKIP_TAG" >> "$GITHUB_OUTPUT"
+          COMMIT_MESSAGES: ${{ env.JOINED_COMMIT_MESSAGES }}
+        run: |
+          echo "$SKIP_TAG"
+          echo "$COMMIT_MESSAGES"
+          echo "skip_release=$SKIP_TAG" >> "$GITHUB_OUTPUT"
       - name: Lint
         run: npm run eslint
       - name: Build
