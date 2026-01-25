@@ -84,9 +84,9 @@ jobs:
           status: "success"
           content: "Build status notification"
           title: "Deploy"
-          description: "Build, test and deploy new version of pokedex"
+          description: "New build successfully deployed and released"
           image: ${{ secrets.EMBED_IMAGE }}
-          color: 0x0000ff
+          color: 0x05AF88
           url: "https://github.com/sarisia/actions-status-discord"
           username: GitHub Actions
           avatar_url: ${{ secrets.AVATAR_URL }}
@@ -98,7 +98,21 @@ jobs:
           status: "cancelled"
           content: "Build status notification"
           title: "Deploy"
-          description: "Build, test and deploy new version of pokedex"
+          description: "Deployment of new build was cancelled"
+          image: ${{ secrets.EMBED_IMAGE }}
+          color: 0xE1FAF9
+          url: "https://github.com/sarisia/actions-status-discord"
+          username: GitHub Actions
+          avatar_url: ${{ secrets.AVATAR_URL }}
+      - name: Failed  notification
+        if: ${{ (env.TEST_SUCCESS == 'false') && (env.DEPLOY_SUCCESS == 'false') }}
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: "failed"
+          content: "Build status notification"
+          title: "Deploy"
+          description: "New build of pokedex failed"
           image: ${{ secrets.EMBED_IMAGE }}
           color: 0xCA2E55
           url: "https://github.com/sarisia/actions-status-discord"
