@@ -28,7 +28,7 @@ jobs:
         name: Check for skip tag in commit message
         env:
           SKIP_TAG: ${{ contains(env.JOINED_COMMIT_MESSAGES, env.SKIP_STRING) }}
-          COMMIT_MESSAGES: ${{ env.JOINED_COMMIT_MESSAGES }}
+          COMMIT_MESSAGES: ${{ join(github.event.commits.*.message, ', ') }}
         run: |
           echo "$SKIP_TAG"
           echo "$COMMIT_MESSAGES"
