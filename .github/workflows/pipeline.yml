@@ -98,7 +98,7 @@ jobs:
           status: "cancelled"
           content: "Build status notification"
           title: "Deploy"
-          description: "Deployment of new build was cancelled"
+          description: "Deployment of new build was cancelled or skipped"
           image: ${{ secrets.EMBED_IMAGE }}
           color: 0xE1FAF9
           url: "https://github.com/sarisia/actions-status-discord"
