@@ -11,7 +11,6 @@ on:
 env:
   JOINED_COMMIT_MESSAGES: ${{ join(github.event.commits.*.message, ', ') }}
   SKIP_STRING: "#skip"
-  EVENT_TYPE: ${{ github.event_name }}
 
 jobs:
   lint_and_test:
@@ -51,7 +50,7 @@ jobs:
 
   deploy_and_release:
     needs: [lint_and_test]
-    if: ${{ (needs.lint_and_test.outputs.skip_release == 'false') && (env.EVENT_TYPE == 'push') }}
+    if: ${{ (needs.lint_and_test.outputs.skip_release == 'false') && (github.event_name == 'push') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
