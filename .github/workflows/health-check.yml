@@ -4,6 +4,7 @@ on:
 
 jobs:
   health_check:
+    runs-on: ubuntu-latest
     steps:
       - name: Perform health check
         uses: jtalk/url-health-check-action@v4
