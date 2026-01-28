@@ -22,7 +22,7 @@ describe('<PokemonList />', () => {
         <PokemonList pokemonList={pokemonList} />
       </BrowserRouter>
     )
-    expect(screen.getByText('bulbasauur')).toBeVisible()
+    expect(screen.getByText('bulbasaur')).toBeVisible()
     expect(screen.getByText('eevee')).toBeVisible()
   })
 })
