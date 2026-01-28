@@ -109,7 +109,7 @@ jobs:
         uses: sarisia/actions-status-discord@v1
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          status: "failed"
+          status: "failure"
           content: "Build status notification"
           title: "Deploy"
           description: "New build of pokedex failed"
