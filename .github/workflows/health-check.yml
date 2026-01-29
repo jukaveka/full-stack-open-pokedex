@@ -1,6 +1,7 @@
 on:
   push:
-    - health-check
+    branches:
+      - health-check
   schedule:
     - cron: '15 * * * *'
 
