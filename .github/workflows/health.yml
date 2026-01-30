@@ -14,6 +14,4 @@ jobs:
         with:
           url: https://full-stack-open-pokedex-4dic.onrender.com/health|http://full-stack-open-pokedex-4dic.onrender.com/health
           follow-redirect: false
-          max-attempts: 5
-          retry-delay: 10s
           retry-all: false
