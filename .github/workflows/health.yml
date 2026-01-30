@@ -3,7 +3,7 @@ on:
     branches:
       - health-check
   schedule:
-    - cron: '15 * * * *'
+    - cron: '20 * * * *'
 
 jobs:
   health_check:
