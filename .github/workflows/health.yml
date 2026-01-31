@@ -1,7 +1,4 @@
 on:
-  push:
-    branches:
-      - health-check
   schedule:
     - cron: '0 9 * * *'
 
