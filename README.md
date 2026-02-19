@@ -14,6 +14,10 @@ Start by running `npm install` inside the project folder
 `npm run build` to make a production build
 `npm run start-prod` to run your production build
 
+## Production
+
+https://full-stack-open-pokedex-4dic.onrender.com/
+
 ## Exercises 11.20 - 11.21 repository
 
 https://github.com/jukaveka/full-stack-cicd-bloglist
